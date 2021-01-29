@@ -27,7 +27,7 @@ def create_app(test_config=None):
         if output:
             return jsonify(output)
         return jsonify({'success': True, 'people found':'no people found'})
-    @app.rout('/people/<string:name>')
+    @app.route('/people/<string:name>')
     def add_person(name):
         if name:
             person = Person(name=name)
