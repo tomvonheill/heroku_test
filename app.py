@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify
 from models import setup_db
 from flask_cors import CORS
-from models import db
+from models import db, Person
 
 def create_app(test_config=None):
 
@@ -23,7 +23,10 @@ def create_app(test_config=None):
     
     @app.route('/people', methods =['GET'])
     def get_people():
-        return jsonify([person.format() for person in db.session.query(People)])
+        output = [person.format() for person in db.session.query(Person)]
+        if ouptut:
+            return jsonify([person.format() for person in db.session.query(Person)])
+        return jsonify({'success': True, 'people found':'no people found'})
 
     return app
 
