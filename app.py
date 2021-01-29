@@ -24,9 +24,19 @@ def create_app(test_config=None):
     @app.route('/people', methods =['GET'])
     def get_people():
         output = [person.format() for person in db.session.query(Person)]
-        if ouptut:
-            return jsonify([person.format() for person in db.session.query(Person)])
+        if output:
+            return jsonify(output)
         return jsonify({'success': True, 'people found':'no people found'})
+    @app.rout('/people/<string:name>')
+    def add_person(name):
+        if name:
+            person = Person(name=name)
+            db.session.add(person)
+            db.session.commit()
+            return jsonify({'message': 'successfully added person',
+            'name': name})
+        return jsonify({'message': 'no name was given'})
+
 
     return app
 
