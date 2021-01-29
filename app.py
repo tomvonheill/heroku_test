@@ -1,8 +1,8 @@
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from models import setup_db
 from flask_cors import CORS
-from flask_migrate import Migrate
+from models import db
 
 def create_app(test_config=None):
 
@@ -20,6 +20,10 @@ def create_app(test_config=None):
     @app.route('/coolkids')
     def be_cool():
         return "Be cool, man, be coooool! You're almost a FSND grad!"
+    
+    @app.route('/people', methods =['GET'])
+    def get_people():
+        return jsonify([person.format() for person in db.session.query(People)])
 
     return app
 
