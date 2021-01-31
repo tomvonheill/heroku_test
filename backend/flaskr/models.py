@@ -18,12 +18,14 @@ def setup_db(app, database_path=database_path):
     db.init_app(app)
     db.create_all()
 
-
 '''
-Person
-Have title and release year
+helper function to retrun column names of ORM
 '''
-
+def get_column_names(orm_class):
+  return orm_class.__table__.columns.keys()
+'''
+Crud mixin adds crud functionality to orm models
+'''
 class CrudMixin:
   def insert(self):
     db.session.add(self)
@@ -48,11 +50,11 @@ class PromotionManager(db.Model, CrudMixin):
     self.id = id
     self.first_name = first_name
     self.last_name = last_name
-    self.phone_number = catchphrase
+    self.phone_number = phone_number
 
   def format(self):
     return {
       'id': self.id,
       'first_name': self.first_name,
       'last_name': self.last_name,
-      'phone_number': self.catchphrase}
+      'phone_number': self.phone_number}
