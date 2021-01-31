@@ -42,7 +42,7 @@ class PromotionManager(db.Model, CrudMixin):
   id = Column(Integer, primary_key=True)
   first_name = Column(String)
   last_name = Column(String)
-  phone_number=Column(string)
+  phone_number=Column(String)
 
   def __init__(self, id,first_name,last_name, phone_number=''):
     self.id = id
