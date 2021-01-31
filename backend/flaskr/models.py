@@ -23,6 +23,18 @@ def setup_db(app, database_path=database_path):
 Person
 Have title and release year
 '''
+
+class CrudMixin:
+  def insert(self):
+    db.session.add(self)
+    db.session.commit()
+  
+  def update(self):
+    db.session.commit()
+  
+  def delete(self):
+    db.session.delete(self)
+    db.session.commit()
 class Person(db.Model):  
   __tablename__ = 'People'
 
@@ -41,20 +53,26 @@ class Person(db.Model):
       'name': self.name,
       'catchphrase': self.catchphrase}
 
-class PromotionManager(db.Model):  
+class PromotionManager(db.Model, CrudMixin):  
   __tablename__ = 'PromotionManager'
 
   id = Column(Integer, primary_key=True)
-  name = Column(String)
-  catchphrase = Column(String)
-  aditionaldata=Column(String)
+  first_name = Column(String)
+  last_name = Column(String)
+  phone_number=Column(string)
 
-  def __init__(self, name, catchphrase=""):
-    self.name = name
-    self.catchphrase = catchphrase
+  def __init__(self, id,first_name,last_name, phone_number=''):
+    self.id = id
+    self.first_name = first_name
+    self.last_name = last_name
+    self.phone_number = catchphrase
 
   def format(self):
     return {
       'id': self.id,
-      'name': self.name,
-      'catchphrase': self.catchphrase}
+      'first_name': self.first_name,
+      'last_name': self.last_name,
+      'phone_number': self.catchphrase}
+
+class Campaign(db.model):
+  __tablename__ = 'Campaign'
