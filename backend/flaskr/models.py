@@ -35,23 +35,6 @@ class CrudMixin:
   def delete(self):
     db.session.delete(self)
     db.session.commit()
-class Person(db.Model):  
-  __tablename__ = 'People'
-
-  id = Column(Integer, primary_key=True)
-  name = Column(String)
-  catchphrase = Column(String)
-  aditionaldata=Column(String)
-
-  def __init__(self, name, catchphrase=""):
-    self.name = name
-    self.catchphrase = catchphrase
-
-  def format(self):
-    return {
-      'id': self.id,
-      'name': self.name,
-      'catchphrase': self.catchphrase}
 
 class PromotionManager(db.Model, CrudMixin):  
   __tablename__ = 'PromotionManager'
