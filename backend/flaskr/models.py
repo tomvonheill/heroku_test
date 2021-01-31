@@ -56,6 +56,3 @@ class PromotionManager(db.Model, CrudMixin):
       'first_name': self.first_name,
       'last_name': self.last_name,
       'phone_number': self.catchphrase}
-
-class Campaign(db.model):
-  __tablename__ = 'Campaign'
