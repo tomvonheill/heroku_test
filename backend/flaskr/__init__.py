@@ -2,10 +2,12 @@ import os
 from flask import Flask, jsonify
 from .models import setup_db, db, Person
 from flask_cors import CORS
+from .promotion_manager.promotion_manager_endpoints import promotion_manager
 
 def create_app(test_config=None):
 
     app = Flask(__name__)
+    app.register_blueprint(promotion_manager)
     setup_db(app)
     CORS(app)
 

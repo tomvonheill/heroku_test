@@ -40,3 +40,21 @@ class Person(db.Model):
       'id': self.id,
       'name': self.name,
       'catchphrase': self.catchphrase}
+
+class PromotionManager(db.Model):  
+  __tablename__ = 'PromotionManager'
+
+  id = Column(Integer, primary_key=True)
+  name = Column(String)
+  catchphrase = Column(String)
+  aditionaldata=Column(String)
+
+  def __init__(self, name, catchphrase=""):
+    self.name = name
+    self.catchphrase = catchphrase
+
+  def format(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'catchphrase': self.catchphrase}
